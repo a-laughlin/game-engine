@@ -53,8 +53,8 @@
 29. A "SpaceTime Point" is a Space Point paired with a Time Point
 30. A "SpaceTime Clock" is a discrete numerical value that corresponds to a SpaceTime's Time Points. Its unit is milliseconds. It enables SpaceTime Elements to change.
 31. A "SpaceTime Offset" is a multiplier that indicates how a SpaceTime's clock changes relative to the Campaign Clock. For now, all offsets are 1 (100%).
-32. "The Campaign Clock" is a monotonically increasing discrete numerical value in milliseconds. It provides a stable comparison for SpaceTime Clocks.
-33. The "TickBase" is a discrete span of time. It is currently 1000 milliseconds regardless of rulebook. The Campaign Clock starts at 0.
+32. "The Campaign Clock" is a monotonically increasing discrete numerical value in milliseconds. It provides a stable comparison for SpaceTime Clocks. It starts at 0.
+33. The "TickBase" is a discrete span of time. It is currently 1000 milliseconds regardless of rulebook.
 34. The "TickMultiplier" differs by whatever the rulebook says. For example a tick may mean 6 seconds in D&D Combat mode and 1 day in D&D Downtime mode. In Combat Mode, we'd set the TickMultiplier to 6. Then issuing a "Tick" transform advances the Campaign Clock by 1000*6, or 6 seconds - to match what the rulebook says.
 35. A Tick is a GM-issued transform that advances the campaign clock by TickBase * TickMultiplier. It also sets SpaceTime Clocks to CampaignClock * SpaceTimeMultiplier, and advances any Campaign Element timers in that SpaceTime by the same amount.
 36. Since the Campaign Clock is in Milliseconds, a 6-second Tick advances the Campaign Clock by 6000. For now, all SpaceTime clocks advance by the same amount.
