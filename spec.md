@@ -55,14 +55,13 @@
 31. A "SpaceTime Offset" is a multiplier that indicates how a SpaceTime's clock changes relative to the Campaign Clock. For now, all offsets are 1 (100%).
 32. "The Campaign Clock" is a monotonically increasing discrete numerical value in milliseconds. It provides a stable comparison for SpaceTime Clocks. It starts at 0.
 33. The "TickBase" is a discrete span of time. It is currently 1000 milliseconds regardless of rulebook.
-34. The "TickMultiplier" differs by whatever the rulebook says. For example a tick may mean 6 seconds in D&D Combat mode and 1 day in D&D Downtime mode. In Combat Mode, we'd set the TickMultiplier to 6. Then issuing a "Tick" transform advances the Campaign Clock by 1000*6, or 6 seconds - to match what the rulebook says.
-35. A Tick is a GM-issued transform that advances the campaign clock by TickBase * TickMultiplier. It also sets SpaceTime Clocks to CampaignClock * SpaceTimeMultiplier, and advances any Campaign Element timers in that SpaceTime by the same amount.
-36. Since the Campaign Clock is in Milliseconds, a 6-second Tick advances the Campaign Clock by 6000. For now, all SpaceTime clocks advance by the same amount.
-37. A "Game Version" is a monotonically increasing discrete numerical value that increments with all Game State changes.Note the definition of "Tick" #33. The base tick is currently 1000 milliseconds (in the example). The Campaign Clock starts at 0. Issuing a Tick Transform advances the Campaign Clock by 1000ms. The Tick Multiplier is what we'd change based on a mode like combat. e.g. Combat Mode in D&D would set the TickMultiplier to 6, so 6*1000 is 6 seconds.
-38. A "Game State" is a snapshot of a Game at a single Game Version. The current Game State is persisted to the game state file on every state change.
-39. A "Transformation" is a list of one or more changes to Game Elements.
-40. A "Game State Patch" is an undoable/replayable diff of each Game Element Change.
-41. A "Narrative" is a multi-layered story that occurs over time. It exists in the GM's head and outside the Game State. The Narrative only affects the Game in that Narrative-progressing Transforms increment the Campaign Clock and Game Version, while Non-narrative-progressing Transforms, like rule overrides, only increment the Game Version.
+34. The "TickMultiplier" differs by whatever the rulebook says. For example a tick may mean 6 seconds in D&D Combat mode and 1 day in D&D Downtime mode. In Combat Mode, we'd set the TickMultiplier to 6. Then issuing a "Tick" transform advances the Campaign Clock by `1000 * 6`, or 6 seconds - to match what the rulebook says.
+35. A Tick is a GM-issued transform that advances the campaign clock by `TickBase * TickMultiplier`. It also sets SpaceTime Clocks to `CampaignClock * SpaceTimeMultiplier` and advances any Campaign Element timers in that SpaceTime by the same amount.
+36. A "Game Version" is a monotonically increasing discrete numerical value that increments with all Game State changes.Note the definition of "Tick" #33. The base tick is currently 1000 milliseconds (in the example). The Campaign Clock starts at 0. Issuing a Tick Transform advances the Campaign Clock by 1000ms. The Tick Multiplier is what we'd change based on a mode like combat. e.g. Combat Mode in D&D would set the TickMultiplier to 6, so 6*1000 is 6 seconds.
+37. A "Game State" is a snapshot of a Game at a single Game Version. The current Game State is persisted to the game state file on every state change.
+38. A "Transformation" is a list of one or more changes to Game Elements.
+39. A "Game State Patch" is an undoable/replayable diff of each Game Element Change.
+40. A "Narrative" is a multi-layered story that occurs over time. It exists in the GM's head and outside the Game State. The Narrative only affects the Game in that Narrative-progressing Transforms increment the Campaign Clock and Game Version, while Non-narrative-progressing Transforms, like rule overrides, only increment the Game Version.
 
 ## Further Rulebook Concepts
 1. Rulebook concepts, meanings, and relationships may be explicit or implicit.
@@ -132,7 +131,7 @@ Creates all transforms appropriate for the example scenario, prepends them to `g
 Returns a useful error when the passed scenario does not match a valid Transformation DSL format.
 
 Example scenarios include:
-- **"6 seconds pass"** Only transforms game time and any other active timers in `game_state.campaign_edges`.
+- **"" (empty string) ** A "Tick"
 - **"Bob casts fireball on Bob"** In this case, creates transforms appropriate for bob to cast fireball at a point centered on himself. Created transforms are automatically expanded with related transforms like targeting and resolution paths, as well as any time advancements appropriate for the transform, game state, and ruleset (like consuming Bob's action, or a "Tick" of 6 seconds for a combat turn.)
 - **"override ...example..."** Creates an override transform for existing ruleset_nodes and ruleset_edges. Unlike other transforms, override patches don't change campaign_edges. Instead they go to ruleset_nodes_overrides or ruleset_edges_overrides for rule lookups.
 
