@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "shell-scripting": {
+      "source": "sammcj/agentic-coding",
+      "sourceType": "github",
+      "computedHash": "d92685edd547f62be381ad667b489b6b4c28d6082957b9c51a6a2ac1b128d5fa"
+    }
+  }
+}
